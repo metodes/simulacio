@@ -1,12 +1,12 @@
 import numpy as np
 
-n = 10
+N = 10
 K_b = 1.380649e-23
 A = 1.0
 
 
 def it_estados():
-    return range(1, n+1)
+    return range(1, N+1)
 
 
 def energia(estado: int) -> float:
