@@ -1,23 +1,20 @@
-#include <iostream>
-#include "colors.h"
+
 import numpy as np
 
 k_b = 1.380649e-23
 
-def  probabilitat(energia, temperatura):
-    # Calcula la probabilitat per a una energia i temperatura donades
+def  probabilitat(energia, temperatura): # Calcula la probabilitat per a una energia i temperatura donades
     beta = 1/(k_b * temperatura)
     return np.exp(-energia * beta)
 
-def montecarlo(num_estats, temperatura, num_iteracions):
-    # Simula la col.lectivitat canònica utilitzant tècniques de Monte Carlo
+def montecarlo(num_estats, temperatura, num_iteracions): # Simula la col.lectivitat canònica
     A = 1.0
 
     # Inicialitzem els arrays d'estats i energies
     estats = np.arange(1, num_estats + 1)
     energies = estats * A * k_b
 
-    # Inicialitzem els comptadors per seguir quants cops passa per cada estat
+    # Inicialitzem els comptadors per saber quants cops passa per cada estat
     comptadors_estat = np.zeros(num_estats)
 
     # Realitzem la simulació de Monte Carlo
