@@ -1,4 +1,5 @@
-```ruby
+#include <iostream>
+#include "colors.h"
 import numpy as np
 
 k_b = 1.380649e-23
@@ -47,4 +48,3 @@ estats, probabilitats = montecarlo(num_estats, temperatura, num_iteracions)
 print("Estats\tProbabilitat")
 for estat, prob in zip(estats, probabilitats):
     print(f"{estat}\t{prob}")
-```
