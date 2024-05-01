@@ -1,46 +1,42 @@
 import numpy as np
 
-k_b = 1.380649e-23
+n = 10
+K_b = 1.380649e-23
+A = 1.0
 
-def  probabilitat(energia, temperatura): # Calcula la probabilitat per a una energia i temperatura donades
-    beta = 1/(k_b * temperatura)
-    return np.exp(-energia * beta)
 
-def montecarlo(num_estats, temperatura, num_iteracions): # Simula la col.lectivitat canònica
-    A = 1.0
+def it_estados():
+    return range(1, n+1)
 
-    # Inicialitzem els arrays d'estats i energies
-    estats = np.arange(1, num_estats + 1)
-    energies = estats * A * k_b
 
-    # Inicialitzem els comptadors per saber quants cops passa per cada estat
-    comptadors_estat = np.zeros(num_estats)
+def energia(estado: int) -> float:
+    return A*estado*K_b
 
-    # Realitzem la simulació de Monte Carlo
-    for _ in range(num_iteracions):
-        # Seleccionem un estat aleatori
-        index_estat = np.random.randint(num_estats)
 
-        # Calculem la probabilitat de Boltzmann per a l'estat seleccionat
-        prob = probabilitat(energies[index_estat], temperatura)
+def beta(temp: float) -> float:
+    return 1/(K_b * temp)
 
-        # Determinem si acceptem la transició d'estat basant-nos en la probabilitat de Boltzmann
-        if np.random.rand() < prob:
-            comptadors_estat[index_estat] += 1
 
-    # Normalitzem els comptadors d'estats per obtenir probabilitats
-    probs_estat = comptadors_estat / num_iteracions
+def particion(temp: float) -> float:
+    resultado = 0.0
+    for i in it_estados():
+        resultado = resultado + np.exp(-beta(temp)*energia(i))
+    return resultado
 
-    return estats, probs_estat
 
-# Paràmetres
-temperatura = 1.0
-num_estats = 10 
-num_iteracions = 1000000
+def probabilidades(temp: float) -> list[float]:
+    part = particion(temp)
+    return [
+        np.exp(-j/temp) / part
+        for j in it_estados()
+    ]
 
-# Executem la simulació
-estats, probabilitats = montecarlo(num_estats, temperatura, num_iteracions)
 
-print("Estats\tProbabilitat")
-for estat, prob in zip(estats, probabilitats):
-    print(f"{estat}\t{prob}")
+temperaturas = [0.01, 0.1, 70, 700]
+
+for temp in temperaturas:
+    print("=====================================")
+    print(f"====== TEMPERATURA {temp} ==========")
+    probs = probabilidades(temp)
+    for estado, prob in zip(it_estados(), probs):
+        print(f"{estado}: {prob}")
