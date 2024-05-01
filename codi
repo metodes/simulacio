@@ -4,7 +4,8 @@ k_b = 1.380649e-23
 
 def  probabilitat(energia, temperatura):
     # Calcula la probabilitat per a una energia i temperatura donades
-    return np.exp(-energia / k_b * temperatura)
+    beta = 1/(k_b * temperatura)
+    return np.exp(-energia * beta)
 
 def montecarlo(num_estats, temperatura, num_iteracions):
     # Simula la col.lectivitat canònica utilitzant tècniques de Monte Carlo
