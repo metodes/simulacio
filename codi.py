@@ -5,26 +5,26 @@ K_b = 1.380649e-23
 A = 1.0
 
 
-def it_estados():
+def it_estados(): #Funció per estalviar codi
     return range(1, N+1)
 
 
-def energia(estado: int) -> float:
+def energia(estado: int) -> float: #Funció per les energies
     return A*estado*K_b
 
 
-def beta(temp: float) -> float:
+def beta(temp: float) -> float: #Funció beta
     return 1/(K_b * temp)
 
 
-def particion(temp: float) -> float:
+def particion(temp: float) -> float: #Funció de partició
     resultado = 0.0
-    for i in it_estados():
+    for i in it_estados(): #Fa el sumatori des de 1 fins el nombre d'estats
         resultado = resultado + np.exp(-beta(temp)*energia(i))
     return resultado
 
 
-def probabilidades(temp: float) -> list[float]:
+def probabilidades(temp: float) -> list[float]: #Calcula la probabilitat de cada estat i el posa a una llista
     part = particion(temp)
     return [
         np.exp(-j/temp) / part
