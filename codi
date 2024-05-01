@@ -1,4 +1,3 @@
-
 import numpy as np
 
 k_b = 1.380649e-23
