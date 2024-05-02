@@ -32,7 +32,7 @@ def paso_montecarlo(estat_actual: int, temp: float) -> int:
 
 
 temperatures = [0.01, 0.1, 70, 700]
-num_pasos = 100000
+Num_pasos = 100000
 
 for temp in temperatures:
     print("==============================")
@@ -45,12 +45,12 @@ for temp in temperatures:
     cont_estats = {estat: 0 for estat in it_estats()}
 
     # Realitza la simulació de Monte Carlo
-    for paso in range(num_pasos):
+    for paso in range(Num_pasos):
         estat_actual = paso_montecarlo(estat_actual, temp)
         cont_estats[estat_actual] += 1
 
     # Calcula les probabilitats després dels cicles de Monte Carlo
-    probabilitats = [cont_estats[estat] / num_pasos for estat in it_estats()]
+    probabilitats = [cont_estats[estat] / Num_pasos for estat in it_estats()]
 
     for estat, prob in zip(it_estats(), probabilitats):
         print(f"{estat}: {prob}")
