@@ -49,7 +49,7 @@ for temp in temperatures:
         estat_actual = paso_montecarlo(estat_actual, temp)
         cont_estats[estat_actual] += 1
 
-    # Calcula les probabilitats finals després dels cicles de Monte Carlo
+    # Calcula les probabilitats després dels cicles de Monte Carlo
     probabilitats = [cont_estats[estat] / num_pasos for estat in it_estats()]
 
     for estat, prob in zip(it_estats(), probabilitats):
