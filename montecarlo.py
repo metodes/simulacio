@@ -15,8 +15,7 @@ def energia(estat: int) -> float:
 
 def paso_montecarlo(estat_actual: int, temp: float) -> int:
 
-    #Realitza un cicle de Monte Carlo en l'estat actual.
-    #Torna el nou estat després del moviment.
+    # Realitza un cicle de Monte Carlo en l'estat actual. Torna el nou estat després del moviment.
 
     # Genera un nou estat aleatori entre 1 y 10
     nou_estat = np.random.randint(1, Num_estats+1)
@@ -41,7 +40,7 @@ for temp in temperatures:
     # Inicialitza l'estat arbitrari
     estat_actual = np.random.randint(1, Num_estats+1)
 
-    # Contadors per registrar la ocupació de cada estat
+    # Contador per registrar la ocupació de cada estat
     cont_estats = {estat: 0 for estat in it_estats()}
 
     # Realitza la simulació de Monte Carlo
